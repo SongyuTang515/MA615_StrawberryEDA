@@ -1198,14 +1198,14 @@ ca_tab_22 <- ca_tab_22 |> drop_one_value_col()
 
 ## Fungicide used in strawberry cultivation
 
-### AZOXYSTROBIN
+### An example: AZOXYSTROBIN
 
 ```{r}
 survey_d_fung <- survey_d_chem %>% filter(type == "FUNGICIDE")
 survey_d_fung <- survey_d_fung %>% filter(Value != "(D)") %>% filter(Value != "(NA)")
 ```
 
-From the table we have many chemicals that may cause serious damage to the aquatic life. For AZOXYSTROBIN, with data in the (https://sitem.herts.ac.uk/aeru/ppdb/en/Reports/54.htm). Every 0.55ml/L's AZOXYSTROBIN causes a serious damage to the Aquatic crustaceans. As we can see from the table.
+From the table we have many chemicals that may cause serious damage to the aquatic life. For [AZOXYSTROBIN](https://sitem.herts.ac.uk/aeru/ppdb/en/Reports/54.htm),every 0.55ml/L's AZOXYSTROBIN causes a serious damage to the Aquatic crustaceans. As we can see from the table.
 
 ```{r}
 survey_d_AZOXYSTROBIN <- survey_d_fung %>% filter(chem_name == "AZOXYSTROBIN")
@@ -1215,7 +1215,25 @@ Both Florida and California use a small amount of AZOXYSTROBIN about 0.3lb/arce/
 
 However, this chemical causes very small damage or moderate damage to the mammal and other creatures. On balance, it may be good fungicide for farmer to use when growing the strawberry.
 
-## Sulfur plays different roles in fungicide and fertilizer
+### Top three fungicide used on strawberry in California
+
+```{r}
+survey_ca_fung_order <- survey_d_fung %>% filter(State == "CALIFORNIA", measure == "LB / ACRE / YEAR") %>% arrange(desc(as.numeric(Value)))
+```
+
+From this table we can see that sulfur, captan and thiram are common top three in California. But we can see two other fungicide that appears in the front.
+
+#### Unexpected Result
+
+The first is FOSETYL-AL. The second is POTASSIUM BICARBON. For the fosetyl-al, it is a widely used fungicide primarily for controlling diseases caused by oomycetes, such as downy mildew and Phytophthora species. In 2019, we can assume that strawberries may be in a "sick" condition. So the farmer use fosetyl-al to deal with this situation. For the potassium bicarbon, it is used as an eco-friendly fungicide, especially in organic farming and can be used to raise the pH of acidic soils, making them more suitable for plant growth. Here are two assumptions, first one is at 2021 California farmers want to make some experiments on organic growth so they tried this fungicide and second one is at 2021 the soil in California is too acid to grow strawberry so that farmers use this chemical to conduct soil amendment.
+
+#### Common three fungicide(sulfur will be discussed seperately)
+
+First, I want to talk [captan](https://sitem.herts.ac.uk/aeru/ppdb/en/Reports/114.htm). For captan, it is effective against a wide range of fungal pathogens. It is commonly used to control diseases like powdery mildew, downy mildew, black spot, and fruit rot in fruits, vegetables, and cereals. In the website, unless you just touch them or use them without protection, it does a very small harm to every creature people may affect them. So captan is normal to widely use.
+
+Second is [thiram](https://sitem.herts.ac.uk/aeru/ppdb/en/Reports/642.htm). For thiram, it likely complements the function of captan. However, unlikely the captan, thiram can do serious damage to the aquatic life from fish to crustaceans. Therefore, farmers should carefully use this fungicide and prevent them from flowing to the waters.
+
+#### Sulfur plays different roles in fungicide and fertilizer
 
 There exists a very interesting things that we can see sulfur appears in both fungicide and fertilizer table. From the website, I see that sulfur is usually a general term for sulfur-containing compounds. For the fertilizer, sulfur can increasing the absorption of nitrogen and Phosphate. But it is important to adjust the proportion. So for both Florida and California, in 2023, they hide the amount and proportion how they use in the fertilizer. For a long term of using sulfur, it will impacts soil pH and cause plant "burn their leaves", which means a low level of manganese and iron
 
@@ -1229,9 +1247,13 @@ From the fungicide side. Sulfur-based pesticides, while effective, present sever
 survey_f_sulfur <- survey_d_fung %>% filter(chem_name == "SULFUR")
 ```
 
-As we can see in the table, around 30lb/acre/year are used in the fungicide. It can not tell the amount of sulfur or the amount of compound but for both it means a lot for the animal and human. We usually use so sulfur compounds to keep fruits fresh it may have a price for the fresh strawberry but i think it should be limited. \## Chemicals used in strawberry cultivaion
+As we can see in the table, around 30lb/acre/year are used in the fungicide. It can not tell the amount of sulfur or the amount of compound but for both it means a lot for the animal and human. We usually use so sulfur compounds to keep fruits fresh it may have a price for the fresh strawberry but i think it should be limited.
+
+## Chemicals used in strawberry cultivaion
 
 ### Six deadly carcinogens from WHO list
+
+With developing of the agricultural technique, these six chemicals cannot be found in recent survey in USA.
 
 [captafol](https://en.wikipedia.org/wiki/Captafol)
 
